@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href={{ "css/materialize.css" | absURL }}  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ .Title }}</title>
+</head>
+<body>
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src={{ "js/materialize.js" | absURL }}></script>
+  <nav class="z-depth-0 grey lighten-3" role="navigation">
+    <ul id="nav-mobile" class="left">
+      <li><a class="black-text" href={{ "" | absURL }}>Home</a></li>
+      <li><a class="black-text" href={{ "about" | absURL }}>About</a></li>
+    </ul>
+  </nav>

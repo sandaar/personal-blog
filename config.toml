@@ -1,0 +1,9 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Victoria's blog"
+theme = "victoria_theme"
+
+[permalinks]
+  about = "/:filename/"
+  page = "/:title/"
+  post = "/:year/:month/:day/:title/"
