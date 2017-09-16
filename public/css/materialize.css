@@ -3,6 +3,7 @@
  * Copyright 2014-2017 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
+
 .materialize-red {
   background-color: #e51c23 !important;
 }
@@ -2152,13 +2153,24 @@ html {
   /* 2 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 /**
  * Remove default margin.
  */
 body {
+  position: relative;
   margin: 0;
+  min-height: 100%;
+  padding-bottom: 6rem;
 }
 
 /* HTML5 display definitions
@@ -2184,6 +2196,15 @@ section,
 summary {
   display: block;
 }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1rem;
+}
+
 
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
