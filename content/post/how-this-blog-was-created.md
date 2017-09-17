@@ -3,7 +3,7 @@ title: "How This Blog Was Created"
 date: 2017-09-16T10:23:47-07:00
 thumbnail: "img/first.jpg"
 ---
-![This is an image](/img/first.jpg)
+![This is an image](img/first.jpg)
 
 A new post
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id sapien velit. Nulla facilisi. Phasellus nibh justo, mattis nec iaculis eu, feugiat vel nunc. Aenean in mi nec magna varius eleifend. Phasellus ornare nec ex et cursus. Ut ultricies dolor vel eros lacinia dapibus. Mauris sed semper lacus.
