@@ -1,0 +1,8 @@
+#!/bin/sh
+USER=victoria
+HOST=victoriarozhina.us
+DIR=/var/www/victoriarozhina.us/html/
+
+rsync -avz public/ ${USER}@${HOST}:${DIR}
+
+exit 0

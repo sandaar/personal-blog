@@ -1,4 +1,4 @@
-baseURL = "http://victoriarozhina.pages.gitlab.raphinator.us/personal-blog/"
+baseURL = "https://victoriarozhina.us"
 languageCode = "en-us"
 title = "Victoria's blog"
 theme = "victoria_theme"
