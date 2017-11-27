@@ -19,6 +19,6 @@ deploy_job:
   tags:
   - blog
   script:
-  - deploy
+  - ./deploy
   only:
   - master
