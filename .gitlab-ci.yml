@@ -4,6 +4,8 @@ stages:
 
 build_job:
   stage: build
+  tags:
+  - blog
   script:
   - hugo
   artifacts:
@@ -14,6 +16,8 @@ build_job:
 
 deploy_job:
   stage: deploy
+  tags:
+  - blog
   script:
   - deploy
   only:
