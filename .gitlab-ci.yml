@@ -3,8 +3,7 @@ stages:
   - deploy
 
 build_job:
-  stage:
-  - build
+  stage: build
   script:
   - hugo
   artifacts:
@@ -14,8 +13,7 @@ build_job:
   - master
 
 deploy_job:
-  stage:
-  - deploy
+  stage: deploy
   script:
   - deploy
   only:
