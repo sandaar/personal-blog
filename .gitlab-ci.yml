@@ -1,24 +1,11 @@
-stages:
-  - build
-  - deploy
-
-build_job:
-  stage: build
+job:
   tags:
   - blog
   script:
   - hugo
+  - rsync -avz public/ victoria@victoriarozhina.us:/var/www/victoriarozhina.us/html/
   artifacts:
     paths:
     - public
-  only:
-  - master
-
-deploy_job:
-  stage: deploy
-  tags:
-  - blog
-  script:
-  - ./deploy
   only:
   - master
