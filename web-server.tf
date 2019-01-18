@@ -18,7 +18,21 @@ resource "digitalocean_droplet" "web-server" {
 
   provisioner "remote-exec" {
     inline = [
-      "uname -a",
+      "sudo yum -y update",
+    ]
+  }
+
+  provisioner "local-exec" {
+    command = "doctl compute droplet-action reboot ${digitalocean_droplet.web-server.id}"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum -y install epel-release",
+      "sudo yum -y install nginx",
+      "sudo systemctl enable nginx",
+      "sudo systemctl start nginx",
+      "sudo bash -c \"echo 'this website is being recreated' > /usr/share/nginx/html/index.html\"",
     ]
   }
 }
