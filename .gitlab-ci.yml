@@ -1,16 +1,5 @@
 stages:
-  - build
   - deploy
-
-build_job:
-  stage: build
-  script:
-  - hugo
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
 
 deploy_job:
   stage: deploy
