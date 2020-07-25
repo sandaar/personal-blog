@@ -30,6 +30,27 @@ resource "azurerm_public_ip" "pip" {
   domain_name_label   = "emeraldthecat"
 }
 
+resource "azurerm_dns_zone" "main" {
+  name                = "victoriarozhina.us"
+  resource_group_name = azurerm_resource_group.main.name
+}
+
+resource "azurerm_dns_a_record" "main" {
+  name                = "www"
+  zone_name           = azurerm_dns_zone.main.name
+  resource_group_name = azurerm_resource_group.main.name
+  ttl                 = 60
+  target_resource_id  = azurerm_public_ip.pip.id
+}
+
+resource "azurerm_dns_a_record" "root-dns" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.main.name
+  resource_group_name = azurerm_resource_group.main.name
+  ttl                 = 60
+  target_resource_id  = azurerm_public_ip.pip.id
+}
+
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic1"
   resource_group_name = azurerm_resource_group.main.name
@@ -44,9 +65,9 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_network_interface" "internal" {
-  name                = "${var.prefix}-nic2"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  name                      = "${var.prefix}-nic2"
+  resource_group_name       = azurerm_resource_group.main.name
+  location                  = azurerm_resource_group.main.location
 
   ip_configuration {
     name                          = "internal"
@@ -70,7 +91,21 @@ resource "azurerm_network_security_rule" "tls" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_port_range      = "443"
-  destination_address_prefix  = azurerm_network_interface.main.private_ip_address
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.main.name
+  network_security_group_name = azurerm_network_security_group.webserver.name
+}
+
+resource "azurerm_network_security_rule" "http" {
+  name                        = "http"
+  priority                    = 102
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  source_address_prefix       = "*"
+  destination_port_range      = "80"
+  destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.main.name
   network_security_group_name = azurerm_network_security_group.webserver.name
 }
@@ -82,15 +117,15 @@ resource "azurerm_network_security_rule" "ssh" {
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
-  source_address_prefix       = "*"
+  source_address_prefix       = "40.83.175.3/32"
   destination_port_range      = "22"
-  destination_address_prefix  = azurerm_network_interface.main.private_ip_address
+  destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.main.name
   network_security_group_name = azurerm_network_security_group.webserver.name
 }
 
-resource "azurerm_network_interface_security_group_association" "main" {
-  network_interface_id      = azurerm_network_interface.internal.id
+resource "azurerm_network_interface_security_group_association" "webserver" {
+  network_interface_id      = azurerm_network_interface.main.id
   network_security_group_id = azurerm_network_security_group.webserver.id
 }
 

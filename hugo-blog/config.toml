@@ -1,0 +1,4 @@
+baseURL = "https://victoriarozhina.us/"
+languageCode = "en-us"
+title = "Universe of universes"
+theme = "hugo-theme-console"
